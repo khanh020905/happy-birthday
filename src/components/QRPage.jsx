@@ -1,6 +1,6 @@
 import { QRCodeSVG } from 'qrcode.react';
 
-const SITE_URL = 'https://happy-birthday-thanh-nhanh.vercel.app/';
+const SITE_URL = 'https://happy-birthday-thanh-nhan.vercel.app/';
 
 export default function QRPage() {
   return (
