@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
 import { Howl } from 'howler';
 import BirthdayScene from './components/BirthdayScene';
@@ -63,12 +63,13 @@ function App() {
     tl.to(glowRef.current, { opacity: 0.3, duration: 1.2, ease: 'power2.inOut' }, 0.8);
     tl.to(titleRef.current, { opacity: 1, scale: 1, duration: 1, ease: 'back.out(1.5)' }, 3.0);
     tl.to(subtitleRef.current, { opacity: 1, duration: 1, ease: 'power2.out' }, 3.5);
+    tl.to(titleRef.current, { scale: 1.05, yoyo: true, repeat: 2, duration: 0.4, ease: 'power1.inOut' }, 4.5);
 
     // Show the message button after cake reveal completes (~5.5s)
     setTimeout(() => setShowButton(true), 5500);
   };
 
-  const handleFinale = () => {
+  const handleFinale = useCallback(() => {
     gsap.timeline()
       .to(flashRef.current, { opacity: 0.6, duration: 0.1 })
       .to(flashRef.current, { opacity: 0, duration: 0.3 });
@@ -76,7 +77,7 @@ function App() {
     gsap.timeline()
       .to(wishRef.current, { opacity: 1, duration: 1 })
       .to(wishRef.current, { opacity: 0, duration: 1, delay: 4 });
-  };
+  }, []);
 
   const handleOpenWish = () => {
     // Fade button out, then show screen
